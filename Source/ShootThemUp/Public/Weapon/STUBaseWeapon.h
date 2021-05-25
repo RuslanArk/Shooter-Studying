@@ -44,6 +44,4 @@ protected:
 	void MakeHit(FHitResult &HitResult, const FVector& TraceStart, const FVector& TraceEnd);
 	
 	
-	
-	
 };
