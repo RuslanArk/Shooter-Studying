@@ -60,7 +60,6 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Damage")
 	FVector2D LandedDamage = FVector2D(10.f, 100.f);
-
 	
 
 public:	

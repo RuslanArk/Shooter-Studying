@@ -78,13 +78,13 @@ void USTUWeaponComponent::EquipWeapon(int32 WeaponIndex)
 
 	CurrentWeapon = Weapons[WeaponIndex];
 	AttachWeaponToSocket(CurrentWeapon, Character->GetMesh(), WeaponEquipSocketName);
-
+	bEquipInProgress = true;
 	PlayAnimMontage(EquipAnimMontage);
 }
 
 void USTUWeaponComponent::StartFire()
 {
-	if (!CurrentWeapon) return;
+	if (!CanFire()) return;
 	CurrentWeapon->StartFire();
 }
 
@@ -96,6 +96,7 @@ void USTUWeaponComponent::StopFire()
 
 void USTUWeaponComponent::NextWeapon()
 {
+	if (!CanEquip()) return;
 	CurrentWeaponIndex = (CurrentWeaponIndex + 1) % Weapons.Num();
 	EquipWeapon(CurrentWeaponIndex);
 }
@@ -127,10 +128,18 @@ void USTUWeaponComponent::InitAnimation()
 void USTUWeaponComponent::OnEquipFinished(USkeletalMeshComponent* MeshComponent)
 {
 	ACharacter* Character = Cast<ACharacter>(GetOwner());
-	if (!Character) return;
+	if (!Character || Character->GetMesh() != MeshComponent) return;
+	
+	bEquipInProgress = false;
+	
+}
 
-	if (Character->GetMesh() == MeshComponent)
-	{
-		UE_LOG(LogWeaponComponent, Warning, TEXT("Notify worked!"));	
-	}	
+bool USTUWeaponComponent::CanFire() const
+{
+	return CurrentWeapon && !bEquipInProgress;
+}
+
+bool USTUWeaponComponent::CanEquip() const
+{
+	return !bEquipInProgress;
 }

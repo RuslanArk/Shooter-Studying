@@ -35,6 +35,9 @@ private:
 	void InitAnimation();
 	void OnEquipFinished(USkeletalMeshComponent* MeshComponent);
 
+	bool CanFire() const;
+	bool CanEquip() const;
+
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
 	TArray<TSubclassOf<ASTUBaseWeapon>> WeaponClasses;
@@ -55,6 +58,7 @@ private:
 	UPROPERTY()
 	TArray<ASTUBaseWeapon*> Weapons;
 
+	bool bEquipInProgress = false;
 	int32 CurrentWeaponIndex = 0;
 };
 
