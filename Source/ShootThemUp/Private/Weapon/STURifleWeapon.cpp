@@ -3,7 +3,6 @@
 
 #include "Weapon/STURifleWeapon.h"
 
-#include "Engine/World.h"
 #include "DrawDebugHelpers.h"
 
 ASTURifleWeapon::ASTURifleWeapon()
