@@ -3,7 +3,9 @@
 
 #include "UI/STUGameHUD.h"
 
+#include "Blueprint/UserWidget.h"
 #include "Engine/Canvas.h"
+
 
 ASTUGameHUD::ASTUGameHUD()
 {
@@ -15,6 +17,17 @@ void ASTUGameHUD::DrawHUD()
 	Super::DrawHUD();
 
 	DrawCrossHair();
+}
+
+void ASTUGameHUD::BeginPlay()
+{
+	Super::BeginPlay();
+
+	UUserWidget* PlayerHUDWidget = CreateWidget<UUserWidget>(GetWorld(), PlayerHUDWidgetClass);
+	if (PlayerHUDWidget)
+	{
+		PlayerHUDWidget->AddToViewport();
+	}
 }
 
 void ASTUGameHUD::DrawCrossHair()
