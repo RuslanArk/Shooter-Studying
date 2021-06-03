@@ -48,7 +48,8 @@ private:
 	FAmmoData CurrentAmmo;
 
 public:
-	FWeaponUIData GetUIData() const { return UIData; }	
+	FWeaponUIData GetUIData() const { return UIData; }
+	FAmmoData GetAmmoData() const { return CurrentAmmo; }
 
 protected:	
 	virtual void BeginPlay() override;

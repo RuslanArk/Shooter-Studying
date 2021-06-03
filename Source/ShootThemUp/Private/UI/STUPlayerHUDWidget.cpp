@@ -5,27 +5,40 @@
 
 #include "Components/STUHealthComponent.h"
 #include "Components/STUWeaponComponent.h"
+#include "ShootThemUp/STUUtils.h"
 
 float USTUPlayerHUDWidget::GetHealthPercent() const
 {
-	const APawn* Player = GetOwningPlayerPawn();
-	if (!Player) return 0.0f;
-
-	const auto Component = Player->GetComponentByClass(USTUHealthComponent::StaticClass());
-	const USTUHealthComponent* HealthComponent = Cast<USTUHealthComponent>(Component);
+	const USTUHealthComponent* HealthComponent = STUUtils::GetSTUPlayerComponent<USTUHealthComponent>(GetOwningPlayerPawn());
 	if (!HealthComponent) return 0.0f;
 
 	return HealthComponent->GetHealthPercent();
 }
 
-bool USTUPlayerHUDWidget::GetWeaponUIData(FWeaponUIData& UIData) const
+bool USTUPlayerHUDWidget::GetCurrentWeaponUIData(FWeaponUIData& UIData) const
 {
-	const APawn* Player = GetOwningPlayerPawn();
-	if (!Player) return false;
-
-	const auto Component = Player->GetComponentByClass(USTUWeaponComponent::StaticClass());
-	const USTUWeaponComponent* WeaponComponent = Cast<USTUWeaponComponent>(Component);
+	const USTUWeaponComponent* WeaponComponent = STUUtils::GetSTUPlayerComponent<USTUWeaponComponent>(GetOwningPlayerPawn());
 	if (!WeaponComponent) return false;
 
-	return WeaponComponent->GetWeaponUIData(UIData);
+	return WeaponComponent->GetCurrentWeaponUIData(UIData);
+}
+
+bool USTUPlayerHUDWidget::GetCurrentAmmoData(FAmmoData& AmmoData) const
+{
+	const USTUWeaponComponent* WeaponComponent = STUUtils::GetSTUPlayerComponent<USTUWeaponComponent>(GetOwningPlayerPawn());
+	if (!WeaponComponent) return false;
+
+	return WeaponComponent->GetCurrentAmmoData(AmmoData);
+}
+
+bool USTUPlayerHUDWidget::IsPlayerAlive() const
+{
+	const USTUHealthComponent* HealthComponent = STUUtils::GetSTUPlayerComponent<USTUHealthComponent>(GetOwningPlayerPawn());
+	return HealthComponent && !HealthComponent->IsDead();
+}
+
+bool USTUPlayerHUDWidget::IsPlayerSpectating() const
+{
+	const auto Controller = GetOwningPlayer();
+	return Controller && Controller->GetStateName() == NAME_Spectating;
 }
