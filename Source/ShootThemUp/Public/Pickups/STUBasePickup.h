@@ -25,6 +25,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pickups")
 	float RespawnTime = 5.0f;
 
+private:
+	float RotationYaw = 0.0f;
+
 public:
 	virtual void Tick(float DeltaTime) override;
 
@@ -37,5 +40,6 @@ private:
 	
 	void PickupWasTaken();
 	void Respawn();
+	void GenerateRotationYaw();
 
 };
