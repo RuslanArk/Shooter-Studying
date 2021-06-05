@@ -3,12 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
+#include "STUWeaponFXComponent.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 
 #include "STUProjectile.generated.h"
 
 class USphereComponent;
+class USTUWeaponFXComponent;
 class UProjectileMovementComponent;
 
 UCLASS()
@@ -16,15 +19,15 @@ class SHOOTTHEMUP_API ASTUProjectile : public AActor
 {
 	GENERATED_BODY()
 
-private:
-	FVector ShotDirection;
-
 protected:
 	UPROPERTY(VisibleAnywhere, Category = "Projectile")
 	USphereComponent* CollisionSphere;
 
 	UPROPERTY(VisibleAnywhere, Category = "Projectile")
 	UProjectileMovementComponent* MovementComponent;
+
+	UPROPERTY(VisibleAnywhere, Category = "Projectile")
+	USTUWeaponFXComponent* WeaponFXComponent;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Damage")
 	float DamageRadius = 200.f;
@@ -37,6 +40,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Damage")
 	bool DoFullDamage = false;
+
+	private:
+	FVector ShotDirection;
 	
 public:
 	ASTUProjectile();

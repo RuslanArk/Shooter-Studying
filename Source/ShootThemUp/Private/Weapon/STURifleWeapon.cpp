@@ -5,9 +5,19 @@
 
 #include "DrawDebugHelpers.h"
 
+#include "Weapon/STUWeaponFXComponent.h"
+
 ASTURifleWeapon::ASTURifleWeapon()
 {
+	WeaponFXComponent = CreateDefaultSubobject<USTUWeaponFXComponent>(TEXT("FX Weapon Component"));
 	
+}
+
+void ASTURifleWeapon::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	check(WeaponFXComponent);
 }
 
 void ASTURifleWeapon::StartFire()
@@ -42,10 +52,11 @@ void ASTURifleWeapon::MakeShot()
 	
 	if (HitResult.bBlockingHit)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("Niagara should spawn"));
 		MakeDamage(HitResult);
-		DrawDebugLine(GetWorld(), GetMuzzleWorldLocation(), HitResult.ImpactPoint, FColor::Red, false, 5.f, 0, 3.0f);
-		DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 10.f, 24, FColor::Red, false, 5.0f);
-		
+		//DrawDebugLine(GetWorld(), GetMuzzleWorldLocation(), HitResult.ImpactPoint, FColor::Red, false, 5.f, 0, 3.0f);
+		//DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 10.f, 24, FColor::Red, false, 5.0f);
+		WeaponFXComponent->PlayImpactFX(HitResult);
 	}
 	else
 	{

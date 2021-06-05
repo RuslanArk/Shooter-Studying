@@ -3,12 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
+#include "STUWeaponFXComponent.h"
 #include "Weapon/STUBaseWeapon.h"
 #include "STURifleWeapon.generated.h"
 
-/**
- * 
- */
+class USTUWeaponFXComponent;
+
 UCLASS()
 class SHOOTTHEMUP_API ASTURifleWeapon : public ASTUBaseWeapon
 {
@@ -22,11 +23,14 @@ public:
 	virtual void StopFire() override;
 
 protected:
+	virtual void BeginPlay() override;
+	
 	virtual void MakeShot() override;
 
 	virtual bool GetTraceData(FVector& TraceStart, FVector& TraceEnd) const override;
 
 	void MakeDamage(FHitResult& HitResult);
+	
 private:
 	FTimerHandle ShotTimerHandle;
 
@@ -39,5 +43,8 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Damage")
 	float BulletSpread = 1.5f;
+
+	UPROPERTY(VisibleAnywhere, Category = "VFX")
+	USTUWeaponFXComponent* WeaponFXComponent;
 	
 };
