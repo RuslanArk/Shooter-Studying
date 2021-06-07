@@ -17,6 +17,7 @@ ASTUProjectile::ASTUProjectile()
 	CollisionSphere->InitSphereRadius(5.f);
 	CollisionSphere->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	CollisionSphere->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Block);
+	CollisionSphere->bReturnMaterialOnMove = true;
 	SetRootComponent(CollisionSphere);
 
 	MovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("MovementComponent"));
