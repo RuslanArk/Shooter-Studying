@@ -3,6 +3,8 @@
 
 #include "Components/STUHealthComponent.h"
 
+#include "Camera/CameraShake.h"
+
 
 USTUHealthComponent::USTUHealthComponent()
 {
@@ -54,6 +56,19 @@ void USTUHealthComponent::SetHealth(float NewHealth)
 	OnHealthChanged.Broadcast(Health);
 }
 
+void USTUHealthComponent::PlayCameraShake()
+{
+	if (IsDead()) return;
+
+	const auto Player = Cast<APawn>(GetOwner());
+	if (!Player) return;
+
+	const auto Controller = Player->GetController<APlayerController>();
+	if (!Controller || !Controller->PlayerCameraManager) return;
+
+	Controller->PlayerCameraManager->StartCameraShake(CameraShake);
+}
+
 void USTUHealthComponent::OnTakeDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType,
                                        AController* InstigatedBy, AActor* DamageCauser)
 {
@@ -70,5 +85,7 @@ void USTUHealthComponent::OnTakeDamage(AActor* DamagedActor, float Damage, const
 	{
 		GetWorld()->GetTimerManager().SetTimer(HealTimerHandle, this, &USTUHealthComponent::HealUpdate, HealUpdateTime, true, HealDelay);
 	}
+
+	PlayCameraShake();
 }
 
