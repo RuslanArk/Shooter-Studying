@@ -42,7 +42,7 @@ void USTUHealthComponent::BeginPlay()
 
 void USTUHealthComponent::HealUpdate()
 {
-	SetHealth(Health += HealModifier);
+	SetHealth(Health + HealModifier);
 
 	if (IsHealthFull() && GetWorld())
 	{
