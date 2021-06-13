@@ -25,7 +25,15 @@ EBTNodeResult::Type USTUNextLocationTask::ExecuteTask(UBehaviorTreeComponent& Ow
 	if (!NavSys) return EBTNodeResult::Failed;
 
 	FNavLocation NavLocation;
-	const bool Found = NavSys->GetRandomReachablePointInRadius(Pawn->GetActorLocation(), Radius, NavLocation);
+	FVector Location = Pawn->GetActorLocation();
+	if (!SelfCenter)
+	{
+		auto CenterActor = Cast<AActor>(Blackboard->GetValueAsObject(CenterActorKey.SelectedKeyName));
+		if (!CenterActor) return EBTNodeResult::Failed;
+		Location = CenterActor->GetActorLocation();
+	}
+	
+	const bool Found = NavSys->GetRandomReachablePointInRadius(Location, Radius, NavLocation);
 	if (!Found) return EBTNodeResult::Failed;
 
 	Blackboard->SetValueAsVector(AimLocationKey.SelectedKeyName, NavLocation.Location);
