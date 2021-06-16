@@ -15,7 +15,6 @@ USTUFindEnemyService::USTUFindEnemyService()
 
 void USTUFindEnemyService::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Finding enemies"));
 	const auto Blackboard = OwnerComp.GetBlackboardComponent();
 	if (Blackboard)
 	{
@@ -29,5 +28,4 @@ void USTUFindEnemyService::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* No
 
 	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
 }
-
 
