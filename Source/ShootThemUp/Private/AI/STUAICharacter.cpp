@@ -3,6 +3,7 @@
 
 #include "AI/STUAICharacter.h"
 
+#include "BrainComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 #include "STUAIController.h"
@@ -19,5 +20,16 @@ ASTUAICharacter::ASTUAICharacter(const FObjectInitializer& ObjInit)
 	{
 		GetCharacterMovement()->bUseControllerDesiredRotation = false;
 		GetCharacterMovement()->RotationRate = FRotator(0.0f, 200.f, 0.0f);
+	}
+}
+
+void ASTUAICharacter::OnDeath()
+{
+	Super::OnDeath();
+
+	const auto STUAIController = Cast<AAIController>(Controller);
+	if (STUAIController && STUAIController->BrainComponent)
+	{
+		STUAIController->BrainComponent->Cleanup();
 	}
 }

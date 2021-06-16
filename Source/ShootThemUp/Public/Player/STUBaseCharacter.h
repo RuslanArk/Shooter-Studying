@@ -75,6 +75,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Moving")
 	float GetMovementDirection() const;
 
+protected:
+	virtual void OnDeath();
+
 private:
 	void MoveForward(float Amount);
 	void MoveRight(float Amount);
@@ -82,8 +85,7 @@ private:
 	void OnStartRunning();
 	void OnStopRunning();
 
-	void OnHealthChanged(float Health, float HealthDelta);
-	void OnDeath();
+	void OnHealthChanged(float Health, float HealthDelta);	
 
 	void SpawnWeapon();
 
