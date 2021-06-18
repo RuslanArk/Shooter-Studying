@@ -27,9 +27,11 @@ protected:
 
 private:
 	float RotationYaw = 0.0f;
+	FTimerHandle RespawnTimer;
 
 public:
 	virtual void Tick(float DeltaTime) override;
+	bool CouldBeTaken() const;
 
 protected:
 	virtual void BeginPlay() override;
