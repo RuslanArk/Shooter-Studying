@@ -28,6 +28,7 @@ public:
 	bool GetCurrentAmmoData(FAmmoData& AmmoData) const;
 
 	bool TryToAddAmmo(TSubclassOf<ASTUBaseWeapon> WeaponClass, int32 ClipsAmount);
+	bool NeedAmmo(TSubclassOf<ASTUBaseWeapon> WeaponClass);
 
 protected:
 	virtual void BeginPlay() override;

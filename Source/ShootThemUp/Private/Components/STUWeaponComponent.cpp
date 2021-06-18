@@ -224,6 +224,18 @@ bool USTUWeaponComponent::TryToAddAmmo(TSubclassOf<ASTUBaseWeapon> WeaponClass, 
 	return false;
 }
 
+bool USTUWeaponComponent::NeedAmmo(TSubclassOf<ASTUBaseWeapon> WeaponClass)
+{
+	for (const auto Weapon : Weapons)
+	{
+		if (Weapon && Weapon->IsA(WeaponClass))
+		{
+			return !Weapon->IsAmmoFull();
+		}
+	}
+	return false;
+}
+
 void USTUWeaponComponent::OnEmptyClip(ASTUBaseWeapon* AmmoEmptyWeapon)
 {
 	if (!AmmoEmptyWeapon) return;

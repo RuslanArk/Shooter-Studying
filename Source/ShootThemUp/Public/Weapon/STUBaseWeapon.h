@@ -19,12 +19,6 @@ class SHOOTTHEMUP_API ASTUBaseWeapon : public AActor
 public:
 	ASTUBaseWeapon();
 
-	virtual void StartFire();
-	virtual void StopFire();
-	
-	void ChangeClip();
-	bool CanReload() const;
-
 	FOnClipEmptySignature OnClipEmpty;
 
 protected:
@@ -50,11 +44,18 @@ private:
 	FAmmoData CurrentAmmo;
 
 public:
+	virtual void StartFire();
+	virtual void StopFire();
+	
+	void ChangeClip();
+	bool CanReload() const;
+	
 	FWeaponUIData GetUIData() const { return UIData; }
 	FAmmoData GetAmmoData() const { return CurrentAmmo; }
 
 	bool TryToAddAmmo(int32 ClipsAmount);
 	bool IsAmmoEmpty() const;
+	bool IsAmmoFull() const;
 
 protected:	
 	virtual void BeginPlay() override;
@@ -72,8 +73,7 @@ protected:
 	void DecreaseAmmo();
 	
 	bool IsClipEmpty() const;
-	void LogAmmo();
-	bool IsAmmoFull() const;
+	void LogAmmo();	
 
 	UNiagaraComponent* SpawnMuzzleFX();
 
