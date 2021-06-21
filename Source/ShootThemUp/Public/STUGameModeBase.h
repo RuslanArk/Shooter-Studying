@@ -20,6 +20,11 @@ public:
 	virtual void StartPlay() override;
 	virtual UClass* GetDefaultPawnClassForController_Implementation(AController* InController) override;
 
+private:
+	void SpawnBots();
+	void StartRound();
+	void GameTimerUpdate();
+	
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Game")
 	TSubclassOf<AAIController> AIControllerClass;
@@ -31,5 +36,8 @@ protected:
 	FGameData GameData;
 
 private:
-	void SpawnBots();
+	int32 CurrentRound = 1;
+	int32 RoundCountDown = 0;
+	FTimerHandle GameRoundTimerHandle;
+
 };
