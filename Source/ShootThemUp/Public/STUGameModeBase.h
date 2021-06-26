@@ -24,6 +24,13 @@ private:
 	void SpawnBots();
 	void StartRound();
 	void GameTimerUpdate();
+
+	void ResetPlayers();
+	void ResetOnePlayer(AController* Controller);
+
+	void CreateTeamsInfo();
+	FLinearColor DetermineColorByTeamID(int32 TeamID) const;
+	void SetPlayerColor(AController* Controller);
 	
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Game")
