@@ -64,6 +64,8 @@ private:
 	void SetHealth(float NewHealth);
 	void PlayCameraShake();
 
+	void Killed(AController* KillerController);
+
 	UFUNCTION()
     void OnTakeDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
 

@@ -5,6 +5,8 @@
 
 #include "Camera/CameraShake.h"
 
+#include "STUGameModeBase.h"
+
 
 USTUHealthComponent::USTUHealthComponent()
 {
@@ -82,6 +84,7 @@ void USTUHealthComponent::OnTakeDamage(AActor* DamagedActor, float Damage, const
 
 	if (IsDead())
 	{
+		Killed(InstigatedBy);
 		OnDeath.Broadcast();
 	}
 	else if (bAutoHeal)
@@ -92,3 +95,15 @@ void USTUHealthComponent::OnTakeDamage(AActor* DamagedActor, float Damage, const
 	PlayCameraShake();
 }
 
+void USTUHealthComponent::Killed(AController* KillerController)
+{
+	if (!GetWorld()) return;
+
+	const auto GameMode = Cast<ASTUGameModeBase>(GetWorld()->GetAuthGameMode());
+	if (!GameMode) return;
+
+	const auto Player = Cast<APawn>(GetOwner());
+	const auto VictimController = Player ? Player->Controller : nullptr;
+
+	GameMode->Killed(KillerController, VictimController);
+}

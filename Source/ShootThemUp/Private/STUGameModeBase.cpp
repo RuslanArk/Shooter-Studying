@@ -62,7 +62,7 @@ void ASTUGameModeBase::StartRound()
 
 void ASTUGameModeBase::GameTimerUpdate()
 {
-	UE_LOG(LogSTUGameMode, Warning, TEXT("Time: %i, Round: %i / %i"), RoundCountDown, CurrentRound, GameData.RoundsNum);
+	//UE_LOG(LogSTUGameMode, Warning, TEXT("Time: %i, Round: %i / %i"), RoundCountDown, CurrentRound, GameData.RoundsNum);
 
 	// returns exact time frequency
 	/*const auto TimerRate = GetWorldTimerManager().GetTimerRate(GameRoundTimerHandle);
@@ -81,6 +81,7 @@ void ASTUGameModeBase::GameTimerUpdate()
 		else
 		{
 			UE_LOG(LogSTUGameMode, Warning, TEXT("====== GAME OVER ======"));
+			LogPlayerInfo();
 		}
 	}
 }
@@ -147,4 +148,36 @@ void ASTUGameModeBase::SetPlayerColor(AController* Controller)
 	if (!PlayerState) return;
 
 	Character->SetPlayerColor(PlayerState->GetTeamColor());
+}
+
+void ASTUGameModeBase::Killed(AController* KillerController, AController* VictimController)
+{
+	const auto KillerState = KillerController ? Cast<ASTUPlayerState>(KillerController->PlayerState) : nullptr;
+	const auto VictimState = VictimController ? Cast<ASTUPlayerState>(VictimController->PlayerState) : nullptr;
+
+	if (KillerState)
+	{
+		KillerState->AddKill();
+	}
+
+	if (VictimState)
+	{
+		VictimState->AddDeath();
+	}
+}
+
+void ASTUGameModeBase::LogPlayerInfo()
+{
+	if (!GetWorld()) return;
+
+	for (auto It = GetWorld()->GetControllerIterator(); It; ++It)
+	{
+		const auto Controller = It->Get();
+		if (!Controller) continue;
+
+		const auto PlayerState = Cast<ASTUPlayerState>(Controller->PlayerState);
+		if (!PlayerState) continue;
+
+		PlayerState->LogInfo();
+	}
 }
