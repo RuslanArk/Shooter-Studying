@@ -22,6 +22,10 @@ public:
 
 	void Killed(AController* KillerController, AController* VictimController);
 
+	FGameData GetGameData() { return GameData; }
+	int32 GetCurrentRoundNum() { return CurrentRound; }
+	int32 GetRoundSecondsRemaining() { return RoundCountDown; }
+
 private:
 	void SpawnBots();
 	void StartRound();
