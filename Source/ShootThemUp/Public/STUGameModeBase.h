@@ -45,6 +45,8 @@ private:
 	void LogPlayerInfo();
 
 	void RespawnStart(AController* Controller);
+
+	void GameOver();
 	
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Game")
