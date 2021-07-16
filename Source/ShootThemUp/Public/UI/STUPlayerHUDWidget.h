@@ -37,5 +37,6 @@ public:
 
 private:
 	void OnHealthChanged(float Health, float HelathDelta);
+	void OnNewPawn(APawn* NewPawn);
 	
 };
