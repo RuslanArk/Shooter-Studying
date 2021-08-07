@@ -47,6 +47,11 @@ private:
 	void RespawnStart(AController* Controller);
 
 	void GameOver();
+
+	void SetMatchState(ESTUMatchState State);
+
+public:
+	FOnMatchStateChangedSignature OnMatchStateChanged;
 	
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Game")
@@ -58,9 +63,13 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Game")
 	FGameData GameData;
 
+
+
 private:
 	int32 CurrentRound = 1;
 	int32 RoundCountDown = 0;
 	FTimerHandle GameRoundTimerHandle;
+
+	ESTUMatchState MatchState = ESTUMatchState::WaitingToStart;
 
 };
