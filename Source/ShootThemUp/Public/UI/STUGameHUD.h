@@ -13,11 +13,7 @@ UCLASS()
 class SHOOTTHEMUP_API ASTUGameHUD : public AHUD
 {
 	GENERATED_BODY()
-
-protected:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI")
-	TSubclassOf<UUserWidget> PlayerHUDWidgetClass;
-
+	
 public:
 	ASTUGameHUD();
 	
@@ -29,4 +25,18 @@ protected:
 private:
 	void DrawCrossHair();
 	void OnMatchStateChanged(ESTUMatchState State);
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI")
+	TSubclassOf<UUserWidget> PlayerHUDWidgetClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI")
+	TSubclassOf<UUserWidget> PauseWidgetClass;
+
+private:	
+	UPROPERTY()
+	TMap<ESTUMatchState, UUserWidget*> GameWidgets;
+
+	UPROPERTY()
+	UUserWidget* CurrentWidget = nullptr;
 };

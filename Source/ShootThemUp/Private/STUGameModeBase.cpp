@@ -204,6 +204,26 @@ void ASTUGameModeBase::RespawnRequest(AController* Controller)
 	ResetOnePlayer(Controller);
 }
 
+bool ASTUGameModeBase::SetPause(APlayerController* PC, FCanUnpause CanUnpauseDelegate)
+{
+	const bool PauseSet = Super::SetPause(PC, CanUnpauseDelegate);
+	if (PauseSet)
+	{
+		SetMatchState(ESTUMatchState::Pause);
+	}
+	return PauseSet;
+}
+
+bool ASTUGameModeBase::ClearPause()
+{
+	const bool PauseCleared = Super::ClearPause();
+	if (PauseCleared)
+	{
+		SetMatchState(ESTUMatchState::InProgress);
+	}
+	return PauseCleared;
+}
+
 void ASTUGameModeBase::GameOver()
 {
 	UE_LOG(LogSTUGameMode, Warning, TEXT("====== GAME OVER ======"));

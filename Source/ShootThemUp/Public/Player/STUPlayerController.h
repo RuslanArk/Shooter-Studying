@@ -4,6 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+
+#include "CoreTypes.h"
+#include "STUCoreTypes.h"
+
 #include "STUPlayerController.generated.h"
 
 class USTURespawnComponent;
@@ -15,9 +19,16 @@ class SHOOTTHEMUP_API ASTUPlayerController : public APlayerController
 
 public:
 	ASTUPlayerController();
-	
+
+protected:
+	virtual void BeginPlay() override;
+	virtual void SetupInputComponent() override;
+
+private:
+	void OnPauseGame();
+	void OnMatchStateChanged(ESTUMatchState State);
+
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	USTURespawnComponent* RespawnComponent;
-	
 };
