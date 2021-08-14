@@ -16,9 +16,7 @@ class SHOOTTHEMUP_API USTUStatRowWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
-
-
-	public:
+public:
 	void SetPlayerName(const FText& Name);
 	void SetKills(const FText& Kills);
 	void SetDeaths(const FText& Deaths);
