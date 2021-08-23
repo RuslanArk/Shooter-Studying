@@ -13,6 +13,8 @@
 #include "ShootThemUp/STUUtils.h"
 #include "UI/STUGameHUD.h"
 
+#include "STUGameInstance.h"
+
 DEFINE_LOG_CATEGORY_STATIC(LogSTUGameMode, All, All);
 
 ASTUGameModeBase::ASTUGameModeBase()
