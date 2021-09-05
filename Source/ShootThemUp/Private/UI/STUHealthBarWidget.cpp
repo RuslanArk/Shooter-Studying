@@ -15,7 +15,7 @@ void USTUHealthBarWidget::SetHealthPercent(float NewPercent)
 
 	HealthProgressBar->SetVisibility(HealthBarVisibility);
 
-	const auto HealthBarColor = NewPercent > PercentVisibilityThreshold ? GoodColor : BadColor;
+	const auto HealthBarColor = NewPercent > PercentColorThreshold ? GoodColor : BadColor;
 	HealthProgressBar->SetFillColorAndOpacity(HealthBarColor);
 	HealthProgressBar->SetPercent(NewPercent);
 }
