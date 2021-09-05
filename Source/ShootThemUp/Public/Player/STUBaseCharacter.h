@@ -67,11 +67,9 @@ public:
 protected:
 	virtual void OnDeath();
 
-private:
+	virtual void OnHealthChanged(float Health, float HealthDelta);
 	
-
-	void OnHealthChanged(float Health, float HealthDelta);	
-
+private:
 	void SpawnWeapon();
 
 	UFUNCTION()
