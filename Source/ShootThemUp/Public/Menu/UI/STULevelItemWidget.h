@@ -30,6 +30,12 @@ protected:
 private:
 	UFUNCTION()
 	void OnLevelItemClicked();
+	
+	UFUNCTION()
+    void OnLevelItemHovered();
+
+	UFUNCTION()
+    void OnLevelItemUnhovered();
 
 protected:
 	UPROPERTY(meta = (BindWidget))

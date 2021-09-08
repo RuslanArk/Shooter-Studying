@@ -55,6 +55,22 @@ int32 USTUPlayerHUDWidget::GetKillsNum() const
 	return PlayerState ? PlayerState->GetKillsNum() : 0;
 }
 
+FString USTUPlayerHUDWidget::FormatBullets(int32 BulletsNum) const
+{
+	const int32 MaxLen = 3;
+	const TCHAR PrefixSymbol = '0';
+
+	auto BulletStr = FString::FromInt(BulletsNum);
+	const auto SymbolsNumToAdd = MaxLen - BulletStr.Len();
+
+	if (SymbolsNumToAdd)
+	{
+		BulletStr = FString::ChrN(SymbolsNumToAdd, PrefixSymbol).Append(BulletStr);
+	}
+
+	return BulletStr;
+}
+
 void USTUPlayerHUDWidget::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
