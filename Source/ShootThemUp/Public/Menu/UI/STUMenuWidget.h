@@ -9,6 +9,8 @@
 
 class UButton;
 class UHorizontalBox;
+class USoundCue;
+class UWidgetAnimation;
 class USTUGameInstance;
 class USTULevelItemWidget;
 
@@ -19,6 +21,7 @@ class SHOOTTHEMUP_API USTUMenuWidget : public USTUBaseWidget
 
 protected:
 	virtual void NativeOnInitialized() override;
+	virtual void OnAnimationFinished_Implementation(const UWidgetAnimation* Animation) override;
 
 private:
 	UFUNCTION()
@@ -41,8 +44,14 @@ protected:
 	UPROPERTY(meta = (BindWidget))
 	UHorizontalBox* LevelItemsBox;
 
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* HideAnimation;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI")
 	TSubclassOf<UUserWidget> LevelItemsWidgetClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Sound")
+	USoundCue* MenuOpenSound;
 
 private:
 	UPROPERTY()
