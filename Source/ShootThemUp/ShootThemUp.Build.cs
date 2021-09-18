@@ -37,7 +37,8 @@ public class ShootThemUp : ModuleRules
 			"ShootThemUp/Public/AI/EQS",
 			"ShootThemUp/Public/AI/Decorator",
 			"ShootThemUp/Public/Menu",
-			"ShootThemUp/Public/Menu/UI"
+			"ShootThemUp/Public/Menu/UI",
+			"ShootThemUp/Public/Sound"
 		});
 
 		// Uncomment if you are using Slate UI

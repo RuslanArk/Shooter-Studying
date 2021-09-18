@@ -27,6 +27,7 @@ protected:
 private:
 	void OnPauseGame();
 	void OnMatchStateChanged(ESTUMatchState State);
+	void OnMuteSound();
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
