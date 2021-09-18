@@ -8,15 +8,16 @@
 #include "Weapon/STUBaseWeapon.h"
 #include "STURifleWeapon.generated.h"
 
-class USTUWeaponFXComponent;
+class UAudioComponent;
 class UNiagaraComponent;
 class UNiagaraSystem;
+
+class USTUWeaponFXComponent;
 
 UCLASS()
 class SHOOTTHEMUP_API ASTURifleWeapon : public ASTUBaseWeapon
 {
 	GENERATED_BODY()
-
 
 public:
 	ASTURifleWeapon();
@@ -34,8 +35,8 @@ protected:
 	void MakeDamage(FHitResult& HitResult);
 	
 private:
-	void InitMuzzleFX();
-	void SetMuzzleFXVisibility(bool Visible);
+	void InitFX();
+	void SetFXActive(bool IsActive);
 	void SpawnTraceFX(const FVector& TraceStart, const FVector& TraceEnd);
 
 	AController* GetController() const;
@@ -64,5 +65,8 @@ private:
 
 	UPROPERTY()
 	UNiagaraComponent* MuzzleFXComponent;
+
+	UPROPERTY()
+	UAudioComponent* FireAudioComponent;
 	
 };

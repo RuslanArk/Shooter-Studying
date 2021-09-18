@@ -6,6 +6,8 @@
 #include "Weapon/STUBaseWeapon.h"
 #include "STULauncherWeapon.generated.h"
 
+class USoundCue;
+
 class ASTUProjectile;
 
 UCLASS()
@@ -16,6 +18,9 @@ class SHOOTTHEMUP_API ASTULauncherWeapon : public ASTUBaseWeapon
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
 	TSubclassOf<ASTUProjectile> ProjectileClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Sound")
+	USoundCue* NoAmmoSound;
 
 public:
 	ASTULauncherWeapon();

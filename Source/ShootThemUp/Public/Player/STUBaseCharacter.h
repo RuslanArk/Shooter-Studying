@@ -9,6 +9,7 @@
 #include "STUBaseCharacter.generated.h"
 
 class UAnimMontage;
+class USoundCue;
 class ASTUBaseWeapon;
 class USTUHealthComponent;
 class USTUWeaponComponent;
@@ -20,11 +21,7 @@ class SHOOTTHEMUP_API ASTUBaseCharacter : public ACharacter
 
 public:
 	// Sets default values for this character's properties
-	ASTUBaseCharacter(const FObjectInitializer& ObjInit);
-
-private:
-
-	
+	ASTUBaseCharacter(const FObjectInitializer& ObjInit);	
 
 protected:
 	// Called when the game starts or when spawned
@@ -51,6 +48,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Material")
 	FName MaterialColorName = "Paint Color";
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Sound")
+	USoundCue* DeathSound;
 
 public:	
 	// Called every frame

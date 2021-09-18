@@ -6,6 +6,8 @@
 
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/Controller.h"
+#include "Kismet/GameplayStatics.h"
+#include "Sound/SoundCue.h"
 
 #include "Components/STUCharacterMovementComponent.h"
 #include "Components/STUHealthComponent.h"
@@ -66,6 +68,8 @@ void ASTUBaseCharacter::OnDeath()
 	WeaponComponent->StopFire();
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	GetMesh()->SetSimulatePhysics(true);
+
+	UGameplayStatics::PlaySoundAtLocation(GetWorld(), DeathSound, GetActorLocation());
 }
 
 void ASTUBaseCharacter::OnGroundLanded(const FHitResult& Hit)

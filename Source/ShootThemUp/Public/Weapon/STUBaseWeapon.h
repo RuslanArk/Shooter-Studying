@@ -8,6 +8,7 @@
 #include "STUBaseWeapon.generated.h"
 
 class USkeletalMeshComponent;
+class USoundCue;
 class UNiagaraSystem;
 class UNiagaraComponent;
 
@@ -39,6 +40,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "VFX")
 	UNiagaraSystem* MuzzleFX;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Sound")
+	USoundCue* FireSound;
 
 private:
 	FAmmoData CurrentAmmo;
