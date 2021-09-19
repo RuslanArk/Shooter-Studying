@@ -42,6 +42,8 @@ private:
 
 	AController* GetController() const;
 
+	
+
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Damage")
 	float DamageAmount = 10.f;	
