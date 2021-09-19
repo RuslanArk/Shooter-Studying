@@ -90,6 +90,19 @@ void ASTURifleWeapon::MakeDamage(FHitResult& HitResult)
 	DamagedActor->TakeDamage(DamageAmount, FDamageEvent(), GetController(), this);
 }
 
+void ASTURifleWeapon::Zoom(bool Enabled)
+{
+	const auto Controller = Cast<APlayerController>(GetController());
+	if (!Controller || !Controller->PlayerCameraManager) return;
+
+	if (Enabled)
+	{
+		DefaultCameraFOV = Controller->PlayerCameraManager->GetFOVAngle();
+	}
+
+	Controller->PlayerCameraManager->SetFOV(Enabled ? FOVZoomAngle : DefaultCameraFOV);
+}
+
 void ASTURifleWeapon::InitFX()
 {
 	if (!MuzzleFXComponent)

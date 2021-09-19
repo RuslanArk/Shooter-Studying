@@ -30,6 +30,8 @@ public:
 	bool TryToAddAmmo(TSubclassOf<ASTUBaseWeapon> WeaponClass, int32 ClipsAmount);
 	bool NeedAmmo(TSubclassOf<ASTUBaseWeapon> WeaponClass);
 
+	void Zoom(bool Enabled);
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;

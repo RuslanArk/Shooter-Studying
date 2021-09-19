@@ -60,12 +60,13 @@ public:
 	bool TryToAddAmmo(int32 ClipsAmount);
 	bool IsAmmoEmpty() const;
 	bool IsAmmoFull() const;
+	virtual void Zoom(bool Enabled) {}
 
 protected:	
 	virtual void BeginPlay() override;
 
 	virtual void MakeShot();
-	virtual bool GetTraceData(FVector &TraceStart, FVector &TraceEnd) const;
+	virtual bool GetTraceData(FVector &TraceStart, FVector &TraceEnd) const;	
 	
 	bool GetPlayerViewPort(FVector &ViewLocation, FRotator &ViewRotation) const;
 
