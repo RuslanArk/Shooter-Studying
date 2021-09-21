@@ -10,7 +10,6 @@
 class ASTUBaseWeapon;
 class UAnimMontage;
 
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SHOOTTHEMUP_API USTUWeaponComponent : public UActorComponent
 {

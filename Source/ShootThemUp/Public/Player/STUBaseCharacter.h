@@ -21,7 +21,31 @@ class SHOOTTHEMUP_API ASTUBaseCharacter : public ACharacter
 
 public:
 	// Sets default values for this character's properties
-	ASTUBaseCharacter(const FObjectInitializer& ObjInit);	
+	ASTUBaseCharacter(const FObjectInitializer& ObjInit);
+
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;	
+
+	UFUNCTION(BlueprintCallable, Category = "Moving")
+    virtual bool IsRunning() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Moving")
+    float GetMovementDirection() const;
+
+	void SetPlayerColor(const FLinearColor& Color);
+	virtual void TurnOff() override;
+	virtual void Reset() override;
+
+protected:
+	virtual void OnDeath();
+
+	virtual void OnHealthChanged(float Health, float HealthDelta);
+	
+private:
+	void SpawnWeapon();
+
+	UFUNCTION()
+    void OnGroundLanded(const FHitResult& Hit);
 
 protected:
 	// Called when the game starts or when spawned
@@ -52,26 +76,4 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Sound")
 	USoundCue* DeathSound;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;	
-
-	UFUNCTION(BlueprintCallable, Category = "Moving")
-	virtual bool IsRunning() const;
-
-	UFUNCTION(BlueprintCallable, Category = "Moving")
-	float GetMovementDirection() const;
-
-	void SetPlayerColor(const FLinearColor& Color);
-
-protected:
-	virtual void OnDeath();
-
-	virtual void OnHealthChanged(float Health, float HealthDelta);
-	
-private:
-	void SpawnWeapon();
-
-	UFUNCTION()
-	void OnGroundLanded(const FHitResult& Hit);
 };

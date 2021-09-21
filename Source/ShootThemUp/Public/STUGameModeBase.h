@@ -53,6 +53,8 @@ private:
 
 	void SetMatchState(ESTUMatchState State);
 
+	void StopAllFire();
+
 public:
 	FOnMatchStateChangedSignature OnMatchStateChanged;
 	
